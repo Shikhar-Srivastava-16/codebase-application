@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.codebase</groupId>
-  <artifactId>app</artifactId>
+  <artifactId>testDataGen</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>app</name>
+  <name>testDataGen</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

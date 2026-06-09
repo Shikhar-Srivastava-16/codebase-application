@@ -42,7 +42,8 @@ public class App {
         File initialFile = new File(confPath.toString());
 
         Toml toml = new Toml().read(initialFile);
-        String datapath = toml.getString("dat");
+        String datapath = toml.getString("data");
+        String finalDatapath = toml.getString("final_data");
 
         System.err.printf("Toml Data Directory: %s\n", datapath);
 
@@ -93,9 +94,9 @@ public class App {
         JsonObject updatedJson = Json.createObjectBuilder()
                 .add("codelings", arrBuilder)
                 .build();
-        // JsonObject updatedJson = codeling.serialiseToJson();
+
         try {
-            Files.write(Paths.get(datapath + "new_codelings.json"), updatedJson.toString().getBytes());
+            Files.write(Paths.get(finalDatapath + "codelings.json"), updatedJson.toString().getBytes());
         } catch (IOException e) {
             System.err.println("====== Error Writing Codelings File ======");
             e.printStackTrace();
