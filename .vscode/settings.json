@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "src",
+        "test_datagen/src/main/java/com/codebase/test-datagen"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

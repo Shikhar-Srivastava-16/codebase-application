@@ -1,0 +1,38 @@
+{
+    "codelings" : [
+        {
+            "bound" : [1,10],
+            "members" : [
+                {
+                    bound : [2,5],
+                    tests : []
+                },
+                {
+                    bound : [2,8],
+                    tests : []
+                },
+                {
+                    bound : [1,10],
+                    tests : []
+                }
+            ]
+        },
+        {
+            "bound" : [15,30],
+            "members" : [
+                {
+                    bound : [17,24],
+                    tests : []
+                },
+                {
+                    bound : [15,27],
+                    tests : []
+                },
+                {
+                    bound : [15,30],
+                    tests : []
+                }
+            ]
+        },
+    ]
+}

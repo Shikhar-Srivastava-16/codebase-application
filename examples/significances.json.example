@@ -1,0 +1,19 @@
+{
+    "significantBlocks" : [
+        {
+            "upper" : 1,
+            "lower" : 5,
+            "sig" : 1
+        },
+        {
+            "upper" : 10,
+            "lower" : 20,
+            "sig" : 1
+        },
+        {
+            "upper" : 10,
+            "lower" : 20,
+            "sig" : 1
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "codelings" : [
+        {
+            "bound" : [1,10],
+            "members" : [
+                {
+                    "upper" : 2,
+                    "lower" : 5,
+                    "tests" : []
+                },
+                {
+                    "upper" : 2,
+                    "lower" : 8,
+                    "tests" : []
+                },
+                {
+                    "upper" : 1,
+                    "lower" : 10,
+                    "tests" : []
+                }
+            ]
+        },
+        {
+            "bound" : [15,30],
+            "members" : [
+                {
+                    "upper" : 17,
+                    "lower" : 24,
+                    "tests" : []
+                },
+                {
+                    "upper" : 15,
+                    "lower" : 27,
+                    "tests" : []
+                },
+                {
+                    "upper" : 15,
+                    "lower" : 30,
+                    "tests" : []
+                }
+            ]
+        }
+    ]
+}
