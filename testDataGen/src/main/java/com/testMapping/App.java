@@ -1,4 +1,4 @@
-package com.codebase;
+package com.testMapping;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -8,12 +8,16 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonValue;
 import javax.json.stream.JsonParser;
 
 import com.moandjiezana.toml.Toml;
@@ -73,11 +77,15 @@ public class App {
 
         LinkedList<Test> allTests = new LinkedList<>();
         for (String testName : line_by_line_test_coverage.keySet()) {
-            LinkedList<Integer> coverage = line_by_line_test_coverage.getJsonArray(testName)
-                .stream()
-                .map(v -> Integer.parseInt(v.toString()))
-                .collect(Collectors.toCollection(LinkedList::new));
-            
+            JsonObject fileCoverage = line_by_line_test_coverage.getJsonObject(testName);
+            Map<String, LinkedList<Integer>> coverage = new HashMap<>();
+            for (String fileName : fileCoverage.keySet()) {
+                LinkedList<Integer> lines = fileCoverage.getJsonArray(fileName)
+                    .stream()
+                    .map(v -> Integer.parseInt(v.toString()))
+                    .collect(Collectors.toCollection(LinkedList::new));
+                coverage.put(fileName, lines);
+            }
             Test test = new Test(testName, coverage);
             allTests.add(test);
         }
@@ -99,6 +107,38 @@ public class App {
             Files.write(Paths.get(finalDatapath + "codelings.json"), updatedJson.toString().getBytes());
         } catch (IOException e) {
             System.err.println("====== Error Writing Codelings File ======");
+            e.printStackTrace();
+        }
+
+        // ── Generate entries.json from codelings ──
+        String solutionsDir = toml.getString("solutions_dir");
+        String entriesFilePath = toml.getString("entries_file");
+        Path solutionsPath = Paths.get(solutionsDir);
+
+        JsonArrayBuilder entriesBuilder = Json.createArrayBuilder();
+
+        for (JsonValue val : stored_codelings.getJsonArray("codelings")) {
+            JsonObject codeling = val.asJsonObject();
+            String filename = codeling.getString("filename");
+            String relativeFile = solutionsPath.relativize(Paths.get(filename)).toString();
+            JsonArray members = codeling.getJsonArray("members");
+
+            for (JsonValue member : members) {
+                int upper = member.asJsonObject().getInt("upper");
+                int lower = member.asJsonObject().getInt("lower");
+
+                entriesBuilder.add(Json.createObjectBuilder()
+                    .add("file", relativeFile)
+                    .add("bounds", Json.createArrayBuilder()
+                        .add(upper)
+                        .add(lower)));
+            }
+        }
+
+        try {
+            Files.write(Paths.get(entriesFilePath), entriesBuilder.build().toString().getBytes());
+        } catch (IOException e) {
+            System.err.println("====== Error Writing Entries File ======");
             e.printStackTrace();
         }
 

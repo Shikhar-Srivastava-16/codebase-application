@@ -1,4 +1,4 @@
-package com.codebase;
+package com.testMapping;
 
 import static org.junit.Assert.assertTrue;
 

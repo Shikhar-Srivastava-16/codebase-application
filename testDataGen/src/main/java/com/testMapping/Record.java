@@ -1,4 +1,4 @@
-package com.codebase;
+package com.testMapping;
 
 import java.util.LinkedList;
 import java.util.stream.Collectors;
@@ -14,11 +14,14 @@ public class Record {
     public int lower;
     LinkedList<String> tests;
 
-    public static void has_overlap(Test test, Record record) {
-        int high = record.lower;
-        int low = record.upper;
+    public static void has_overlap(Test test, Record record, String filename) {
+        LinkedList<Integer> lines = test.coverage.get(filename);
+        if (lines == null) return;
 
-        for (int line : test.coverage) {
+        int low = record.upper;
+        int high = record.lower;
+
+        for (int line : lines) {
             if (line >= low && line <= high) {
                 record.tests.add(test.name);
                 return;
@@ -26,10 +29,10 @@ public class Record {
         }
     }
 
-    public void discoverTests(LinkedList<Test> allTests) {
+    public void discoverTests(LinkedList<Test> allTests, String filename) {
         for (Test test : allTests) {
             if (!tests.contains(test.name)) {
-                has_overlap(test, this);
+                has_overlap(test, this, filename);
             }
         }
     }

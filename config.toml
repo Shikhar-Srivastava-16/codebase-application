@@ -1,2 +1,4 @@
 data = "/home/shikhar/yotta/projects/codebase-application/data/"
 final_data = "/home/shikhar/yotta/projects/codebase-application/data/"
+solutions_dir = "/home/shikhar/yotta/tmp/python-P1"
+entries_file = "/home/shikhar/yotta/projects/codebase-application/data/entries.json"
