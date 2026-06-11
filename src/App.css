@@ -48,12 +48,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 1.5rem 4rem;
+  padding: 2rem 2rem 4rem;
 }
 
 .banner-warning {
   width: 100%;
-  max-width: 900px;
+  max-width: 1400px;
   background: rgba(251, 191, 36, 0.1);
   border: 1px solid rgba(251, 191, 36, 0.3);
   color: #fbbf24;
@@ -66,7 +66,7 @@ body {
 /* Stage container */
 .stage-container {
   width: 100%;
-  max-width: 980px;
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -354,6 +354,35 @@ body {
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.75;
+}
+
+/* Test output panel */
+.test-output-panel {
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+  padding: 1.25rem 1.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.test-output-panel-green {
+  background: var(--green-dim);
+  border-color: var(--green-border);
+}
+
+.test-output-panel-red {
+  background: var(--red-dim);
+  border-color: var(--red-border);
+}
+
+.test-output-content {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* Diff section */

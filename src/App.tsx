@@ -5,21 +5,56 @@ import { Stage } from './types';
 import { useApi } from './hooks/useApi';
 import './App.css';
 
+const STORAGE_KEY = 'codereview-user-codes';
+
+function loadSavedCodes(): Record<string, string> {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveCodes(codes: Record<string, string>) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(codes));
+  } catch { /* quota exceeded, ignore */ }
+}
+
 const App: React.FC = () => {
-  const { entries, loading, error } = useApi();
+  const { entries, loading, error, submitCode } = useApi();
   const [stage, setStage] = useState<Stage>('give-code');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [userCodes, setUserCodes] = useState<Record<string, string>>({});
+  const [userCodes, setUserCodes] = useState<Record<string, string>>(loadSavedCodes);
 
   useEffect(() => {
     if (entries.length > 0) {
-      const initial: Record<string, string> = {};
-      entries.forEach((e) => {
-        initial[e.id] = e.starterCode;
+      setUserCodes((prev) => {
+        const merged = { ...prev };
+        let changed = false;
+        entries.forEach((e) => {
+          if (!(e.id in merged)) {
+            merged[e.id] = e.starterCode;
+            changed = true;
+          }
+        });
+        if (changed) saveCodes(merged);
+        return merged;
       });
-      setUserCodes(initial);
     }
   }, [entries]);
+
+  useEffect(() => {
+    saveCodes(userCodes);
+  }, [userCodes]);
+
+  const handleViewReport = () => {
+    const entry = entries[currentIndex];
+    const code = userCodes[entry.id] ?? entry.starterCode;
+    submitCode(entry.id, code);
+    setStage('report');
+  };
 
   if (loading) {
     return (
@@ -62,7 +97,7 @@ const App: React.FC = () => {
           onCodeChange={handleCodeChange}
           onNext={() => setCurrentIndex((i) => Math.min(i + 1, entries.length - 1))}
           onPrev={() => setCurrentIndex((i) => Math.max(i - 1, 0))}
-          onViewReport={() => setStage('report')}
+          onViewReport={handleViewReport}
         />
       )}
 

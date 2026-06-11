@@ -3,6 +3,7 @@ export type Stage = 'give-code' | 'report';
 export interface ReportStatus {
   color: 'red' | 'green';
   message?: string;
+  testOutput?: string;
 }
 
 export interface CodeEntry {
@@ -13,6 +14,7 @@ export interface CodeEntry {
   reportCode: string;
   reportText: string;
   reportStatus: ReportStatus;
+  fileName: string;
 }
 
 export interface AppState {

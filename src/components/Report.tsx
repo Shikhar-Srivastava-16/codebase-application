@@ -1,6 +1,8 @@
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
+import { python } from '@codemirror/lang-python';
+import { cpp } from '@codemirror/lang-cpp';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EditorState } from '@codemirror/state';
 import { CodeEntry } from '../types';
@@ -11,8 +13,16 @@ interface ReportProps {
   onBack: () => void;
 }
 
+function getLangExtension(fileName: string) {
+  if (fileName.endsWith('.py')) return python();
+  if (fileName.endsWith('.cpp') || fileName.endsWith('.c') || fileName.endsWith('.h')) return cpp();
+  return javascript({ typescript: true });
+}
+
 const Report: React.FC<ReportProps> = ({ entry, userCode, onBack }) => {
   const reportColor = entry.reportStatus.color;
+  const height = '750px';
+  const testOutput = entry.reportStatus.testOutput;
 
   return (
     <div className="stage-container">
@@ -31,6 +41,13 @@ const Report: React.FC<ReportProps> = ({ entry, userCode, onBack }) => {
         <span>{entry.reportStatus.message ?? (reportColor === 'green' ? 'All checks passed' : 'Issues found')}</span>
       </div>
 
+      {testOutput && (
+        <div className={`test-output-panel test-output-panel-${reportColor}`}>
+          <div className="panel-label">Test Output</div>
+          <pre className="test-output-content">{testOutput}</pre>
+        </div>
+      )}
+
       <div className="report-feedback-panel">
         <div className="panel-label">Feedback</div>
         <p className="report-feedback-text">{entry.reportText}</p>
@@ -45,15 +62,15 @@ const Report: React.FC<ReportProps> = ({ entry, userCode, onBack }) => {
                 <span className="dot dot-yellow" />
                 <span className="dot dot-green" />
               </span>
-              <span className="toolbar-filename">your-solution.ts</span>
+              <span className="toolbar-filename">{entry.fileName}</span>
             </div>
             <div className="diff-badge diff-badge-user">Your code</div>
           </div>
           <CodeMirror
             value={userCode}
-            height="320px"
+            height={height}
             theme={oneDark}
-            extensions={[javascript({ typescript: true })]}
+            extensions={[getLangExtension(entry.fileName)]}
             className="code-editor"
           />
         </div>
@@ -66,16 +83,16 @@ const Report: React.FC<ReportProps> = ({ entry, userCode, onBack }) => {
                 <span className="dot dot-yellow" />
                 <span className="dot dot-green" />
               </span>
-              <span className="toolbar-filename">reference.ts</span>
+              <span className="toolbar-filename">{entry.fileName}</span>
             </div>
             <div className="diff-badge diff-badge-ref">Reference</div>
           </div>
           <CodeMirror
             value={entry.reportCode}
-            height="320px"
+            height={height}
             theme={oneDark}
             extensions={[
-              javascript({ typescript: true }),
+              getLangExtension(entry.fileName),
               EditorState.readOnly.of(true),
             ]}
             className="code-editor code-editor-immutable"

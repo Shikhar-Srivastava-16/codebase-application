@@ -1,6 +1,8 @@
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
+import { python } from '@codemirror/lang-python';
+import { cpp } from '@codemirror/lang-cpp';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { CodeEntry } from '../types';
 
@@ -13,6 +15,12 @@ interface GiveCodeProps {
   onNext: () => void;
   onPrev: () => void;
   onViewReport: () => void;
+}
+
+function getLangExtension(fileName: string) {
+  if (fileName.endsWith('.py')) return python();
+  if (fileName.endsWith('.cpp') || fileName.endsWith('.c') || fileName.endsWith('.h')) return cpp();
+  return javascript({ typescript: true });
 }
 
 const GiveCode: React.FC<GiveCodeProps> = ({
@@ -49,7 +57,7 @@ const GiveCode: React.FC<GiveCodeProps> = ({
               <span className="dot dot-yellow" />
               <span className="dot dot-green" />
             </span>
-            <span className="toolbar-filename">solution.ts</span>
+            <span className="toolbar-filename">{entry.fileName}</span>
           </div>
           <div className="toolbar-right">
             <button
@@ -73,9 +81,9 @@ const GiveCode: React.FC<GiveCodeProps> = ({
 
         <CodeMirror
           value={userCode}
-          height="360px"
+          height="750px"
           theme={oneDark}
-          extensions={[javascript({ typescript: true })]}
+          extensions={[getLangExtension(entry.fileName)]}
           onChange={onCodeChange}
           className="code-editor"
         />

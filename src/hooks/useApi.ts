@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { CodeEntry, EntriesResponse } from '../types';
+import { CodeEntry, EntriesResponse, ReportStatus } from '../types';
 
 const BASE_URL = '/api';
 
@@ -29,9 +29,15 @@ export function useApi() {
 
   const submitCode = useCallback(async (entryId: string, code: string) => {
     try {
-      await axios.post(`${BASE_URL}/submit`, { entryId, code });
+      const res = await axios.post<{ reportStatus: ReportStatus; testOutput?: string }>(`${BASE_URL}/submit`, { entryId, code });
+      const { reportStatus, testOutput } = res.data;
+      setEntries(prev =>
+        prev.map(e => e.id === entryId ? { ...e, reportStatus: { ...reportStatus, testOutput } } : e)
+      );
+      return reportStatus;
     } catch {
       console.warn('Submit endpoint unavailable, continuing in demo mode.');
+      return null;
     }
   }, []);
 
@@ -72,6 +78,7 @@ console.log(fibonacci(10)); // 55`,
       reportText:
         'The iterative approach has O(n) time complexity and O(1) space. Your recursive implementation would have been O(2^n) without memoization. The key insight is tracking two running values rather than recomputing.',
       reportStatus: { color: 'green', message: 'All tests passed' },
+      fileName: 'fibonacci.ts',
     },
     {
       id: '2',
@@ -107,6 +114,7 @@ function reverseList(head: ListNode | null): ListNode | null {
       reportText:
         'Classic three-pointer technique. You must save the next pointer before overwriting it, then redirect the current node backwards. Time: O(n), Space: O(1). Recursive solutions are elegant but risk stack overflow on very long lists.',
       reportStatus: { color: 'green', message: 'Optimal solution' },
+      fileName: 'reverse-list.ts',
     },
     {
       id: '3',
@@ -141,6 +149,7 @@ console.log(isValid("([)]"));    // false`,
       reportText:
         'Stack-based approach is canonical here. Push opening brackets, pop and compare when you see a closing bracket. The edge case of an empty stack on a closing bracket is handled implicitly — stack.pop() returns undefined which never matches a valid opener.',
       reportStatus: { color: 'red', message: 'Missing edge case: empty string' },
+      fileName: 'parentheses.ts',
     },
   ];
 }
