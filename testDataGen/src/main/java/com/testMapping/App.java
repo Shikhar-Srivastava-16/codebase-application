@@ -124,14 +124,17 @@ public class App {
             JsonArray members = codeling.getJsonArray("members");
 
             for (JsonValue member : members) {
-                int upper = member.asJsonObject().getInt("upper");
-                int lower = member.asJsonObject().getInt("lower");
+                JsonObject memberObj = member.asJsonObject();
+                int upper = memberObj.getInt("upper");
+                int lower = memberObj.getInt("lower");
+                JsonArray tests = memberObj.getJsonArray("tests");
 
                 entriesBuilder.add(Json.createObjectBuilder()
                     .add("file", relativeFile)
                     .add("bounds", Json.createArrayBuilder()
                         .add(upper)
-                        .add(lower)));
+                        .add(lower))
+                    .add("tests", tests));
             }
         }
 
