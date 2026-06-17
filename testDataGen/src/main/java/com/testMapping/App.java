@@ -29,7 +29,7 @@ import com.moandjiezana.toml.Toml;
 public class App {
     public static void main( String[] args ) {
 
-        // Print Absolute Path of `.`
+        // Get Absolute Path of `.`
         Path absPath;
         try {
             absPath = Paths.get(

@@ -4,9 +4,57 @@
             "filename": "/home/shikhar/yotta/tmp/python-P1/src/inverted_int.py",
             "members": [
                 {
-                    "upper": 7,
-                    "lower": 48,
+                    "upper": 11,
+                    "lower": 14,
                     "tests": [
+                        "\"\\\"tests.test_checks.TestChecks.test_has_all_idempotents_property\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_multiplication\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_inverted_right_distributivity\\\"\"",
+                        "\"\\\"tests.test_exceptions.TestExceptions.test_exception_raising\\\"\"",
+                        "\"\\\"tests.test_inverted_int.TestInvertedInteger.test_add_inverted_integer\\\"\"",
+                        "\"\\\"tests.test_inverted_int.TestInvertedInteger.test_inverted_integer_initialisation\\\"\"",
+                        "\"\\\"tests.test_inverted_int.TestInvertedInteger.test_mul_inverted_integer\\\"\"",
+                        "\"\\\"tests.test_inverted_ints.TestInvertedIntegers.test_element\\\"\"",
+                        "\"\\\"tests.test_inverted_ints.TestInvertedIntegers.test_elements\\\"\"",
+                        "\"\\\"tests.test_inverted_ints.TestInvertedIntegers.test_iteration\\\"\"",
+                        "\"\\\"tests.test_inverted_ints.TestInvertedIntegers.test_str_representation\\\"\"",
+                        "\"\\\"tests.test_utils.TestUtils.test_examine_roots_of_unity\\\"\"",
+                        "\"\\\"tests.test_utils.TestUtils.test_inverted_roots_of_unity\\\"\""
+                    ]
+                },
+                {
+                    "upper": 31,
+                    "lower": 49,
+                    "tests": [
+                        "\"\\\"tests.test_checks.TestChecks.test_has_all_idempotents_property\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_multiplication\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_inverted_right_distributivity\\\"\"",
+                        "\"\\\"tests.test_inverted_int.TestInvertedInteger.test_add_inverted_integer\\\"\"",
+                        "\"\\\"tests.test_inverted_int.TestInvertedInteger.test_mul_inverted_integer\\\"\"",
+                        "\"\\\"tests.test_utils.TestUtils.test_examine_roots_of_unity\\\"\"",
+                        "\"\\\"tests.test_utils.TestUtils.test_inverted_roots_of_unity\\\"\"",
+                        "\"tests.test_checks.TestChecks.test_has_all_idempotents_property\"",
+                        "\"tests.test_checks.TestChecks.test_has_associative_inverted_addition\"",
+                        "\"tests.test_checks.TestChecks.test_has_associative_inverted_multiplication\"",
+                        "\"tests.test_checks.TestChecks.test_has_commutative_inverted_addition\"",
+                        "\"tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication\"",
+                        "\"tests.test_checks.TestChecks.test_has_inverted_right_distributivity\"",
+                        "\"tests.test_exceptions.TestExceptions.test_exception_raising\"",
+                        "\"tests.test_inverted_int.TestInvertedInteger.test_add_inverted_integer\"",
+                        "\"tests.test_inverted_int.TestInvertedInteger.test_inverted_integer_initialisation\"",
+                        "\"tests.test_inverted_int.TestInvertedInteger.test_mul_inverted_integer\"",
+                        "\"tests.test_inverted_ints.TestInvertedIntegers.test_element\"",
+                        "\"tests.test_inverted_ints.TestInvertedIntegers.test_elements\"",
+                        "\"tests.test_inverted_ints.TestInvertedIntegers.test_iteration\"",
+                        "\"tests.test_inverted_ints.TestInvertedIntegers.test_str_representation\"",
+                        "\"tests.test_utils.TestUtils.test_examine_roots_of_unity\"",
+                        "\"tests.test_utils.TestUtils.test_inverted_roots_of_unity\"",
                         "tests.test_checks.TestChecks.test_has_all_idempotents_property",
                         "tests.test_checks.TestChecks.test_has_associative_inverted_addition",
                         "tests.test_checks.TestChecks.test_has_associative_inverted_multiplication",
@@ -26,25 +74,31 @@
                     ]
                 },
                 {
-                    "upper": 75,
-                    "lower": 92,
-                    "tests": [
-                        "tests.test_checks.TestChecks.test_has_all_idempotents_property",
-                        "tests.test_checks.TestChecks.test_has_associative_inverted_addition",
-                        "tests.test_checks.TestChecks.test_has_associative_inverted_multiplication",
-                        "tests.test_checks.TestChecks.test_has_commutative_inverted_addition",
-                        "tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication",
-                        "tests.test_checks.TestChecks.test_has_inverted_right_distributivity",
-                        "tests.test_inverted_int.TestInvertedInteger.test_add_inverted_integer",
-                        "tests.test_inverted_int.TestInvertedInteger.test_mul_inverted_integer",
-                        "tests.test_utils.TestUtils.test_examine_roots_of_unity",
-                        "tests.test_utils.TestUtils.test_inverted_roots_of_unity"
-                    ]
-                },
-                {
                     "upper": 106,
                     "lower": 131,
                     "tests": [
+                        "\"\\\"tests.test_checks.TestChecks.test_has_all_idempotents_property\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_multiplication\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_inverted_right_distributivity\\\"\"",
+                        "\"\\\"tests.test_exceptions.TestExceptions.test_exception_raising\\\"\"",
+                        "\"\\\"tests.test_inverted_int.TestInvertedInteger.test_add_inverted_integer\\\"\"",
+                        "\"\\\"tests.test_inverted_int.TestInvertedInteger.test_mul_inverted_integer\\\"\"",
+                        "\"\\\"tests.test_utils.TestUtils.test_examine_roots_of_unity\\\"\"",
+                        "\"\\\"tests.test_utils.TestUtils.test_inverted_roots_of_unity\\\"\"",
+                        "\"tests.test_checks.TestChecks.test_has_all_idempotents_property\"",
+                        "\"tests.test_checks.TestChecks.test_has_associative_inverted_addition\"",
+                        "\"tests.test_checks.TestChecks.test_has_associative_inverted_multiplication\"",
+                        "\"tests.test_checks.TestChecks.test_has_commutative_inverted_addition\"",
+                        "\"tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication\"",
+                        "\"tests.test_checks.TestChecks.test_has_inverted_right_distributivity\"",
+                        "\"tests.test_exceptions.TestExceptions.test_exception_raising\"",
+                        "\"tests.test_inverted_int.TestInvertedInteger.test_add_inverted_integer\"",
+                        "\"tests.test_inverted_int.TestInvertedInteger.test_mul_inverted_integer\"",
+                        "\"tests.test_utils.TestUtils.test_examine_roots_of_unity\"",
+                        "\"tests.test_utils.TestUtils.test_inverted_roots_of_unity\"",
                         "tests.test_checks.TestChecks.test_has_all_idempotents_property",
                         "tests.test_checks.TestChecks.test_has_associative_inverted_addition",
                         "tests.test_checks.TestChecks.test_has_associative_inverted_multiplication",
@@ -67,6 +121,12 @@
                     "upper": 28,
                     "lower": 65,
                     "tests": [
+                        "\"\\\"tests.test_checks.TestChecks.test_has_all_idempotents_property\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_associative_inverted_multiplication\\\"\"",
+                        "\"tests.test_checks.TestChecks.test_has_all_idempotents_property\"",
+                        "\"tests.test_checks.TestChecks.test_has_associative_inverted_addition\"",
+                        "\"tests.test_checks.TestChecks.test_has_associative_inverted_multiplication\"",
                         "tests.test_checks.TestChecks.test_has_all_idempotents_property",
                         "tests.test_checks.TestChecks.test_has_associative_inverted_addition",
                         "tests.test_checks.TestChecks.test_has_associative_inverted_multiplication"
@@ -76,6 +136,10 @@
                     "upper": 91,
                     "lower": 131,
                     "tests": [
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_addition\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication\\\"\"",
+                        "\"tests.test_checks.TestChecks.test_has_commutative_inverted_addition\"",
+                        "\"tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication\"",
                         "tests.test_checks.TestChecks.test_has_commutative_inverted_addition",
                         "tests.test_checks.TestChecks.test_has_commutative_inverted_multiplication"
                     ]
@@ -84,6 +148,10 @@
                     "upper": 194,
                     "lower": 253,
                     "tests": [
+                        "\"\\\"tests.test_checks.TestChecks.test_has_inverted_right_distributivity\\\"\"",
+                        "\"\\\"tests.test_checks.TestChecks.test_multiplicative_span\\\"\"",
+                        "\"tests.test_checks.TestChecks.test_has_inverted_right_distributivity\"",
+                        "\"tests.test_checks.TestChecks.test_multiplicative_span\"",
                         "tests.test_checks.TestChecks.test_has_inverted_right_distributivity",
                         "tests.test_checks.TestChecks.test_multiplicative_span"
                     ]
@@ -97,6 +165,10 @@
                     "upper": 17,
                     "lower": 35,
                     "tests": [
+                        "\"\\\"tests.test_exceptions.TestExceptions.test_exception_messages\\\"\"",
+                        "\"\\\"tests.test_exceptions.TestExceptions.test_exception_raising\\\"\"",
+                        "\"tests.test_exceptions.TestExceptions.test_exception_messages\"",
+                        "\"tests.test_exceptions.TestExceptions.test_exception_raising\"",
                         "tests.test_exceptions.TestExceptions.test_exception_messages",
                         "tests.test_exceptions.TestExceptions.test_exception_raising"
                     ]
