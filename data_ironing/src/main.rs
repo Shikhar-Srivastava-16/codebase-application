@@ -1,6 +1,9 @@
 mod config;
 mod data;
 
+#[macro_use]
+mod macros;
+
 use config::{Config, fetch_conf_path};
 use data::{load_codelings, load_entries, load_test_coverage};
 use std::fs;
