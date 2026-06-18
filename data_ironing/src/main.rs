@@ -5,7 +5,7 @@ mod data;
 mod macros;
 
 use config::{Config, fetch_conf_path};
-use data::{load_codelings, load_entries, load_test_coverage};
+use data::{Entry, load_codelings, load_test_coverage, save_codelings, save_entries};
 use std::fs;
 
 fn main() {
@@ -17,54 +17,63 @@ fn main() {
     let data_dir = conf.data;
 
     // Load all JSON files
-    println!("Loading JSON files from {}...", data_dir);
+    let mut codelings = match load_codelings(format!("{}/codelings.json", data_dir)) {
+        Ok(codelings) => codelings,
+        // FIXME: Better Errors
+        Err(e) => panic!("Failed to load codelings.json: {}", e),
+    };
 
-    match load_codelings(format!("{}/codelings.json", data_dir)) {
-        Ok(codelings) => {
-            println!("Loaded codelings.json");
-            println!("  - Found {} codeling(s)", codelings.codelings.len());
-            for codeling in &codelings.codelings {
-                println!(
-                    "    - {}: {} member(s)",
-                    codeling.filename,
-                    codeling.members.len()
-                );
+    let coverage_by_file = match load_test_coverage(format!("{}/test_coverage.json", data_dir)) {
+        Ok(coverage) => coverage.tests,
+        Err(e) => panic!("Failed to load test_coverage.json: {}", e),
+    };
+
+    // populate test_coverage json: add the new lines that each test has been found to cover
+    // Add a line iff there is overlap between the lines that the test covers and the lines in the
+    // codeling
+    for (test, file_lines_map) in coverage_by_file {
+        // FIXME: don't call unwrap()
+        for (file, covered_lines) in file_lines_map {
+            // for each codeling, if file matches and lines overlap, add `test`
+            for codeling in &mut codelings.codelings {
+                if codeling.filename == file {
+                    for member in &mut codeling.members {
+                        // Check if any covered line falls within the member's line range
+                        // Member range is [upper, lower] inclusive
+                        let has_overlap = covered_lines
+                            .iter()
+                            .any(|&line| line >= member.upper && line <= member.lower);
+                        // FIXME: remove tests whose coverage has changed to exclude this record
+                        if has_overlap {
+                            // Add test to member's tests if not already present
+                            if !member.tests.contains(&test) {
+                                member.tests.push(test.clone());
+                            }
+                        }
+                    }
+                }
             }
         }
-        Err(e) => eprintln!("Failed to load codelings.json: {}", e),
     }
 
-    match load_entries(format!("{}/entries.json", data_dir)) {
-        Ok(entries) => {
-            println!("Loaded entries.json");
-            println!("  - Found {} entries", entries.len());
-            for entry in &entries {
-                println!(
-                    "    - {}: lines {}-{} with {} test(s)",
-                    entry.file,
-                    entry.bounds[0],
-                    entry.bounds[1],
-                    entry.tests.len()
-                );
-            }
+    // make entries.json file
+    let mut ents: Vec<Entry> = Vec::new();
+
+    // FIXME: remove redundant additions
+    for codeling in &codelings.codelings {
+        let file = &codeling.filename;
+
+        for member in &codeling.members {
+            let ent = Entry {
+                file: file.clone(),
+                bounds: [member.upper, member.lower],
+                tests: member.tests.clone(),
+            };
+            ents.push(ent);
         }
-        Err(e) => eprintln!("Failed to load entries.json: {}", e),
     }
 
-    match load_test_coverage(format!("{}/test_coverage.json", data_dir)) {
-        Ok(coverage) => {
-            println!("Loaded test_coverage.json");
-            println!("  - Found {} test(s)", coverage.tests.len());
-            for (test_name, files) in &coverage.tests {
-                let total_lines: usize = files.values().map(|lines| lines.len()).sum();
-                println!(
-                    "    - {}: {} file(s), {} line(s)",
-                    test_name,
-                    files.len(),
-                    total_lines
-                );
-            }
-        }
-        Err(e) => eprintln!("Failed to load test_coverage.json: {}", e),
-    }
+    // FIXME: handle err
+    let _ = save_codelings(format!("{}/codelings.json", data_dir), &codelings);
+    let _ = save_entries(format!("{}/entries.json", data_dir), &ents);
 }

@@ -25,6 +25,10 @@ pub struct Codeling {
     pub members: Vec<Member>,
 }
 
+impl Codeling {
+    pub fn update_coverage_records(&self) -> () {}
+}
+
 /// Represents an entry with file, bounds, and tests
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Entry {
@@ -34,8 +38,12 @@ pub struct Entry {
 }
 
 /// Represents the test coverage mapping
-#[derive(Debug, Serialize, Deserialize)]
+// #[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct TestCoverage {
+    // Name: {
+    //      File: [lines in file]
+    // }
     #[serde(flatten)]
     pub tests: HashMap<String, HashMap<String, Vec<usize>>>,
 }
@@ -64,25 +72,16 @@ pub fn load_test_coverage<P: AsRef<Path>>(
 }
 
 /// Serialize codelings to JSON string
-#[allow(dead_code)]
 pub fn serialize_codelings(codelings: &Codelings) -> Result<String, serde_json::Error> {
     serde_json::to_string_pretty(codelings)
 }
 
 /// Serialize entries to JSON string
-#[allow(dead_code)]
 pub fn serialize_entries(entries: &[Entry]) -> Result<String, serde_json::Error> {
     serde_json::to_string_pretty(entries)
 }
 
-/// Serialize test coverage to JSON string
-#[allow(dead_code)]
-pub fn serialize_test_coverage(coverage: &TestCoverage) -> Result<String, serde_json::Error> {
-    serde_json::to_string_pretty(coverage)
-}
-
 /// Save codelings to file
-#[allow(dead_code)]
 pub fn save_codelings<P: AsRef<Path>>(
     path: P,
     codelings: &Codelings,
@@ -93,23 +92,11 @@ pub fn save_codelings<P: AsRef<Path>>(
 }
 
 /// Save entries to file
-#[allow(dead_code)]
 pub fn save_entries<P: AsRef<Path>>(
     path: P,
     entries: &[Entry],
 ) -> Result<(), Box<dyn std::error::Error>> {
     let json = serialize_entries(entries)?;
-    fs::write(path, json)?;
-    Ok(())
-}
-
-/// Save test coverage to file
-#[allow(dead_code)]
-pub fn save_test_coverage<P: AsRef<Path>>(
-    path: P,
-    coverage: &TestCoverage,
-) -> Result<(), Box<dyn std::error::Error>> {
-    let json = serialize_test_coverage(coverage)?;
     fs::write(path, json)?;
     Ok(())
 }
