@@ -16,8 +16,10 @@ export function useApi() {
       const res = await axios.get<EntriesResponse>(`${BASE_URL}/entries`);
       setEntries(res.data.entries);
     } catch (err) {
-      setError('Failed to load entries from backend. Using demo data.');
-      setEntries(getDemoEntries());
+      // Demo fallback removed. To restore, uncomment the two lines below:
+      // setError('Failed to load entries from backend. Using demo data.');
+      // setEntries(getDemoEntries());
+      setError('Failed to load entries from backend.');
     } finally {
       setLoading(false);
     }
@@ -44,6 +46,7 @@ export function useApi() {
   return { entries, loading, error, refetch: fetchEntries, submitCode };
 }
 
+/*
 function getDemoEntries(): CodeEntry[] {
   return [
     {
@@ -153,3 +156,4 @@ console.log(isValid("([)]"));    // false`,
     },
   ];
 }
+*/
