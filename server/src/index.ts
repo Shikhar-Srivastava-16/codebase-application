@@ -66,6 +66,8 @@ function loadEntries(): InternalEntry[] {
         const description = `Implement the code at lines ${start}-${end} of ${entry.file}. The solution must pass all associated tests (${entry.tests.length} test(s)).`;
         const reportText = `The reference for lines ${start}-${end} of ${entry.file} is shown on the right. Your code runs against ${entry.tests.length} test(s).`;
 
+        console.log(`Entry ${i + 1}:`, JSON.stringify({ title, starterCode, reportCode, fileName }, null, 2));
+
         return {
             id: String(i + 1),
             title,
@@ -105,7 +107,7 @@ function runTests(entry: InternalEntry, code: string): { reportStatus: ReportSta
         fs.writeFileSync(targetPath, code, 'utf-8');
 
         const testNodes = entry.tests.map(testPathToPytest).join(' ');
-        const env = { ...process.env, PYTHONPATH: tmpDir };
+        const env = { ...process.env, PYTHONPATH: [tmpDir, process.env.PYTHONPATH].filter(Boolean).join(':') };
         const cmd = `python3 -m pytest ${testNodes} -v --no-header -q 2>&1`;
 
         const stdout = execSync(cmd, { cwd: tmpDir, timeout: 30000, encoding: 'utf-8', env });
