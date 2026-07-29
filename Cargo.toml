@@ -1,0 +1,3 @@
+[workspace]
+resolver = "3"
+members = ["config","data_ironing", "generation-agent"]
