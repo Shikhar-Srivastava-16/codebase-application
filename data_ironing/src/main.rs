@@ -1,10 +1,9 @@
-mod config;
 mod data;
 
 #[macro_use]
 mod macros;
 
-use config::{Config, fetch_conf_path};
+use config::{Config, fetch_config};
 use data::{Entry, load_codelings, load_test_coverage, save_codelings, save_entries};
 use std::fs;
 
@@ -12,7 +11,7 @@ fn main() {
     // FIXME: Config: Derive defaults + add fallback to default
     // Don't call .unwrap(), use fallback to default instead
 
-    let conf: Config = toml::from_str(&fs::read_to_string(fetch_conf_path()).unwrap()).unwrap();
+    let conf = fetch_config();
 
     let data_dir = conf.data;
 
