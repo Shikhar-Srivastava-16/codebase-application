@@ -45,3 +45,6 @@ dist/
 .env
 .env.local
 *.tsbuildinfo
+
+# for fastembed
+generation-agent/.fastembed_cache
